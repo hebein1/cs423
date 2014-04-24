@@ -1,0 +1,61 @@
+This is my hadoop .java file & makefile
+
+It is based off the original WordCount.java & original makefile
+
+It should work completely with the parsed xml files
+
+----------
+
+It reads in text files with this format:
+
+MP4_START_MP4 title title ...
+word word word MP4_END_MP4
+MP4_START_MP4 title title ...
+word word ...
+word ...
+word word ...
+word word ...
+word MP4_END_MP4
+
+For example:
+
+MP4_START_MP4 hello WORLD
+goodbye MOM WORLD MP4_END_MP4
+MP4_START_MP4 hello WORLD
+goodbye DAD
+a
+b a
+c a
+d MP4_END_MP4
+
+Notice that each wiki page is parsed so it starts with "MP4_START_MP4 title title ...\n" and ends with "... MP4_END_MP4\n" with the article text in between
+
+----------
+
+The input to each map is one article:
+
+MP4_START_MP4 title title ...
+word word word MP4_END_MP4
+
+----------
+
+The output of each map is:
+
+word/title - offset,filename
+
+----------
+
+The reducer input is:
+
+word/title - offset,filename | offset,filename ...
+
+----------
+
+The reducer output is:
+
+word/title - offset,filename,count | offset,filename,count ...
+
+----------
+
+This can then be used in a search engine by using the count to find the best article and using the offset/filemane to read the title
+
