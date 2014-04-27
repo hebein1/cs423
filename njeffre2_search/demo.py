@@ -8,12 +8,16 @@ if len(sys.argv) == 1:
 	print "Usage: ./demo.py word_to_search"
 	exit(0)
 
+outputdir = "../hadoop-1.0.4/output/"
+inputdir = "../hadoop-1.0.4/input/"
+
+
 #Search through files and count matching
 docs = {}
-for subdir, dirs, files in os.walk('../hadoop-1.0.4/output'):
+for subdir, dirs, files in os.walk(outputdir):
 	for file in files:
 		run = True
-		f = open('../hadoop-1.0.4/output/'+file, 'r')
+		f = open(outputdir+file, 'r')
 		line = f.readline()
 		if len(line) == 0:
 			run = False
@@ -46,6 +50,14 @@ for key, amount in docs.iteritems():
 			temp = word[i]
 			word[i] = testword
 			testword = temp
+for i in range(listupto):
+	w = word[i]
+	if w != '':
+		w = w.split(".txt")
+		f = open(inputdir+w[0]+".txt")
+		f.read(int(w[1]))
+		word[i] = f.readline()
+	
 print " ".join(sys.argv[1:])
 for i in range(listupto):
-	print str(i) + ": " + word[i]
+	print str(i+1) + ": " + word[i]
