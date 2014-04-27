@@ -22,7 +22,7 @@ for subdir, dirs, files in os.walk('../hadoop-1.0.4/output'):
 			for i in range(len(sys.argv) - 1):
 				if line[0] == sys.argv[i+1]:
 					for j in range(len(line)/3):
-						doc = line[2+j*3]
+						doc = line[2+j*3]+line[1+j*3]
 						if doc in docs:
 							docs[doc] += int(line[3 + j*3])
 						else:
