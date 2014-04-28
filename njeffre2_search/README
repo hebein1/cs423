@@ -1,0 +1,5 @@
+To run the demo, you must have the inverted index files stored in a directory by themselves,
+and the parsed xml files (though they don't need to be by themselves).
+The demo file takes these as arguments as well as a variable number of search terms.
+
+example: ./demo.py (indexloc) (xmlloc) words to search

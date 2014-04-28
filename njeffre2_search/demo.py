@@ -4,13 +4,12 @@ import sys
 import re
 import os
 
-if len(sys.argv) == 1:
-	print "Usage: ./demo.py word_to_search"
+if len(sys.argv) < 4:
+	print "Usage: ./demo.py (inverted index dir) (xml files dir) words to search"
 	exit(0)
 
-outputdir = "/team/cs423/njeffre2/"
-inputdir = "/media/B5A8-70D6/for Adam/20.xml/"
-f = open("/media/B5A8-70D6/for Adam/20.xml/1.txt")
+outputdir = sys.argv[1]#"/team/cs423/njeffre2/"
+inputdir = sys.argv[2]#"/media/B5A8-70D6/for Adam/20.xml/"
 
 
 #Search through files and count matching
@@ -26,8 +25,8 @@ for subdir, dirs, files in os.walk(outputdir):
 			run = False
 		while run:
 			line = re.split('[,\t\n|]',line)
-			for i in range(len(sys.argv) - 1):
-				if line[0] == sys.argv[i+1].lower():
+			for i in range(len(sys.argv) - 3):
+				if line[0] == sys.argv[i+3].lower():
 					for j in range(len(line)/3):
 						doc = line[2+j*3]+line[1+j*3]
 						if doc in docs:
@@ -48,7 +47,7 @@ listupto = 10
 word = ["" for i in range(listupto)]
 val = [0 for i in range(listupto)]
 for key, amount in docs.iteritems():
-	if counts[key] == len(sys.argv) - 1:
+	if counts[key] == len(sys.argv) - 3:
 		testing = amount
 		testword = key
 		for i in range(listupto):
